@@ -3,14 +3,12 @@ const router  = express.Router();
 const createError  = require('http-errors')
 
 const service = require('../service/roles.service');
+const { createResultOut } = require('../utils/output');
 
 
 router.get('/all',(req,res,next)=>{
 
-    res.json({
-
-        employees:service.getAll()
-    })
+    res.json(createResultOut(service.getAll()));
 })
 
 router.get('/search/:code',(req,res,next)=>{

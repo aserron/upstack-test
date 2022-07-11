@@ -132,3 +132,7 @@ function EmployeeDTO() {
 /**
  * @typedef {{role_id: number, name: string, id: number, email: string, username: string}} IEmployee
  */
+
+/**
+ * @typedef {{total: number, results:IEmployee[]}} IEmployeeList
+ */

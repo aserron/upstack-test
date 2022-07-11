@@ -93,3 +93,7 @@ function RoleDTO() {
 /**
  * @typedef {{role_name: string, role_code: string, id: number}} IRole
  */
+
+/**
+ * @typedef {{total: number, results:IRole[]}} IRoleList
+ */

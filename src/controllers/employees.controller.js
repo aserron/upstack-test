@@ -5,13 +5,12 @@ const router = express.Router();
 
 const service = require('../service/employee.service');
 
+const { createResultOut } = require('../utils/output');
+
 router.get('/all', (req, res, next) => {
 
     const list = service.getAll();
-    res.json({
-        total: list.length,
-        results: list
-    });
+    res.json(createResultOut(list));
 });
 router.get('/username/:username', (req, res, next) => {
 
