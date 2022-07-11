@@ -1,8 +1,12 @@
 'use strict'
+const controllerSetup = require( './routes/index');
 const express = require('express')
 const httpErrors = require('http-errors')
 const pino = require('pino')
 const pinoHttp = require('pino-http')
+
+//
+const service = require("./service/employee.service")
 
 module.exports = function main (options, cb) {
   // Set default options
@@ -53,7 +57,7 @@ module.exports = function main (options, cb) {
   // Alternativly, you could setup external log handling for startup
   // errors and handle them outside the node process.  I find this is
   // better because it works out of the box even in local development.
-  require('./routes/routes')(app, opts)
+  controllerSetup(app, opts);
 
   // Common error handlers
   app.use(function fourOhFourHandler (req, res, next) {
@@ -88,4 +92,6 @@ module.exports = function main (options, cb) {
     ready(err, app, server)
   })
 }
+
+
 
