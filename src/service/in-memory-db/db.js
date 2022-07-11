@@ -103,7 +103,7 @@ class MemoryDBAdapter {
             loader(url, this);
 
             this.getDB(dbname).visit((item) => {
-                console.log(item.id,item);
+                // console.log(item.id,item);
             });
 
 
