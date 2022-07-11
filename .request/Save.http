@@ -1,0 +1,9 @@
+POST http://localhost:3001/employees/save
+Content-Type: application/json
+
+{
+  "name"    : "Poly Stark",
+  "email"   : "poly.stark@avengers.com",
+  "username": "polystark",
+  "role_id" : 1
+}

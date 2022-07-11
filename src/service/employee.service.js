@@ -68,7 +68,45 @@ module.exports = {
         return result;
     },
 
+    /**
+     *
+     * @param {IEmployee} employeeData
+     */
+    saveEmployee  : function saveEmployee(employeeData){
+
+        let roles = instance.getDB(DB_NAME_ROLES);
+
+        const db = instance.getDB(DB_NAME_EMPLOYEE);
+
+        const newItem = {...employeeData,id: db.lastId + 1};
+
+        newItem.role = roles.get(newItem.role_id);
+        db.set(newItem);
+
+        return newItem;
+    },
+
+
     getAllRoles : function(){
 
     }
 };
+
+/**
+ *
+ * @returns {{role_id: number, name: string, id: number, email: string, username: string}}
+ * @constructor
+ */
+function EmployeeDTO() {
+    return {
+        'id': 1,
+        'name': 'Tony Stark',
+        'email': 'tony.stark@avengers.com',
+        'username': 'tonystark',
+        'role_id': 1
+    };
+}
+
+/**
+ * @typedef {{role_id: number, name: string, id: number, email: string, username: string}} IEmployee
+ */

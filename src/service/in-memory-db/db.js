@@ -6,6 +6,8 @@ class InMemoryDatabase {
         this.db = {};
         this.beforeAddListeners = createObserver();
         this.afterAddListeners = createObserver();
+
+        this.lastId = 0;
     }
     set(newValue) {
         this.beforeAddListeners.publish({
@@ -16,6 +18,8 @@ class InMemoryDatabase {
         this.afterAddListeners.publish({
             value: newValue,
         });
+
+        this.lastId = newValue.id;
     }
     get(id) {
         return this.db[id];

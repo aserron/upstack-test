@@ -24,5 +24,13 @@ router.get('/search/:name',(req,res,next)=>{
     res.json(service.searchByName(req.params.name))
 })
 
+router.post('/save', function (req, res) {
+
+    let newItem = service.saveEmployee(req.body);
+
+    res.status(201).json(   newItem);
+});
+
+
 module.exports = router;
 

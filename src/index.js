@@ -7,6 +7,7 @@ const pinoHttp = require('pino-http')
 
 //
 const service = require("./service/employee.service")
+const bodyParser = require('express');
 
 module.exports = function main (options, cb) {
   // Set default options
@@ -45,6 +46,12 @@ module.exports = function main (options, cb) {
 
   // Create the express app
   const app = express()
+
+  // parse requests of content-type - application/x-www-form-urlencoded
+  app.use(bodyParser.urlencoded({ extended: true }));
+
+// parse requests of content-type - application/json
+  app.use(bodyParser.json());
 
 
   // Common middleware
