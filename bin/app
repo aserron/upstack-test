@@ -6,5 +6,5 @@ require('dotenv').config()
 // Pass configuration to application
 require('../src/index')({
   port: process.env.PORT || 3001,
-  host: process.env.PORT ||'localhost'
+  host: process.env.HOST ||'localhost'
 })
