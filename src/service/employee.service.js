@@ -31,8 +31,8 @@ module.exports = {
 
     getAll : getAllEmployee,
 
-    getByName :function getByName(name='') {
-        let roles = instance.getDB('roles');
+    getByUserName :function getByUserName(name='') {
+        let roles = instance.getDB(DB_NAME_ROLES);
 
         const result = []
         instance.getDB(DB_NAME_EMPLOYEE).visit((item)=>{
@@ -48,6 +48,24 @@ module.exports = {
         })
 
         return result[0];
+    },
+    searchByName  :function searchByName(name='') {
+        let roles = instance.getDB('roles');
+
+        const result = []
+        instance.getDB(DB_NAME_EMPLOYEE).visit((item)=>{
+
+            if(item.name.toLowerCase().includes(name)){
+                let employee = {
+                    ...item,
+                    role:{...roles.get(item.role_id)}
+                };
+                console.log(employee);
+                result.push(employee);
+            }
+        })
+
+        return result;
     },
 
     getAllRoles : function(){
