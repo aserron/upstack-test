@@ -23,7 +23,7 @@ router.get('/username/:username',(req,res,next)=>{
     console.log(req.params.name);
     res.json(service.getByUserName(req.params.username))
 })
-router.get('/search/code',(req,res,next)=>{
+router.get('/search/:name',(req,res,next)=>{
 
     console.log(req.params.name);
     res.json(service.searchByName(req.params.name))
