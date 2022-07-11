@@ -46,14 +46,14 @@ module.exports = function main (options, cb) {
   // Common middleware
   // app.use(/* ... */)
   app.use(pinoHttp({ logger }))
-      
+
   // Register routes
   // @NOTE: require here because this ensures that even syntax errors
   // or other startup related errors are caught logged and debuggable.
   // Alternativly, you could setup external log handling for startup
   // errors and handle them outside the node process.  I find this is
   // better because it works out of the box even in local development.
-  require('./routes')(app, opts)
+  require('./routes/routes')(app, opts)
 
   // Common error handlers
   app.use(function fourOhFourHandler (req, res, next) {
@@ -84,7 +84,7 @@ module.exports = function main (options, cb) {
 
     serverStarted = true
     const addr = server.address()
-    logger.info(`Started at ${opts.host || addr.host || 'localhost'}:${addr.port}`)
+    logger.info(`Started at http://${opts.host || addr.host || 'localhost'}:${addr.port}`)
     ready(err, app, server)
   })
 }

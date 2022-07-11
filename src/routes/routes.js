@@ -1,6 +1,6 @@
 'use strict'
-const simple = require('./handlers/simple')
-const configured = require('./handlers/configured')
+const simple = require('../controllers/simple.controller')
+const configured = require('../controllers/configured.controller')
 
 module.exports = function (app, opts) {
   // Setup routes, middleware, and handlers
