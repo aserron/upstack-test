@@ -1,29 +1,31 @@
 const createError = require('http-errors');
 
-
-
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 
 const service = require('../service/employee.service');
 
-router.get('/all',(req,res,next)=>{
+router.get('/all', (req, res, next) => {
 
-    res.json(service.getAll())
-})
-router.get('/username/:username',(req,res,next)=>{
+    const list = service.getAll();
+    res.json({
+        total: list.length,
+        results: list
+    });
+});
+router.get('/username/:username', (req, res, next) => {
 
     console.log(req.params.name);
-    res.json(service.getByUserName(req.params.username))
-})
-router.get('/search/:name',(req,res,next)=>{
+    res.json(service.getByUserName(req.params.username));
+});
+router.get('/search/:name', (req, res, next) => {
 
     console.log(req.params.name);
-    res.json(service.searchByName(req.params.name))
-})
+    res.json(service.searchByName(req.params.name));
+});
 router.post('/save', function (req, res, next) {
 
-    let err = new createError.BadRequest()
+    let err = new createError.BadRequest();
     let msg = '';
 
     /**
@@ -32,27 +34,24 @@ router.post('/save', function (req, res, next) {
      */
     let data = req.body;
 
-    if(service.getByUserName(data.username)){
+    if (service.getByUserName(data.username)) {
         msg = 'username must be unique.';
         err.message = msg;
         next(err);
-    }
-    else if(service.getByEmail(data.email)){
-        err.message = 'email must be unique.'
+    } else if (service.getByEmail(data.email)) {
+        err.message = 'email must be unique.';
         next(err);
-    }
-    else if(!data.role_id){
+    } else if (!data.role_id) {
         err.message = 'Role Id must be present.';
         next(err);
-    }
-    else {
+    } else {
         let newItem = service.saveEmployee(req.body);
 
-        res.status(201).json(   newItem);
+        res.status(201)
+            .json(newItem);
     }
 
 });
-
 
 module.exports = router;
 
