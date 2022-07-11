@@ -16,8 +16,7 @@ function getAllEmployee() {
                 ...item,
                 role: { ...roles.get(item.role_id) }
             };
-            delete (employee.role_id)
-            // console.log(employee);
+            delete (employee.role_id)            // console.log(employee);
             result.push(employee);
         });
 
